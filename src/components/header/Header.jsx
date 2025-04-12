@@ -4,12 +4,18 @@ import Navbar from './Navbar'
 import HeaderItems from './HeaderItems'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
+
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
+
+  
+
+
+  
 
   return (
     <header className=' md:mx-16 p-5'>

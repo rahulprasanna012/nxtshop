@@ -1,36 +1,20 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductMiddleware } from '../redux/productMiddleware';
-import productSlice from '../redux/productSlice';
-
+import { toggleWishlist } from '../redux/productSlice';
 
 const Hero = () => {
- 
+    const { filteredProduct, loading, wishlist } = useSelector((store) => store.product);
+    const dispatch = useDispatch();
 
-    const{product,loading,wishlist}=useSelector((store)=>(store.productState))
+    useEffect(() => {
+        dispatch(fetchProductMiddleware()); // Add parentheses to call the function
+    }, [dispatch]);
 
-    const dispatch=useDispatch();
-    const action=productSlice.actions;
-
-    useEffect(()=>{
-
-        dispatch(fetchProductMiddleware)
-
-    },[])
-
-    
-
-    const toggleWishlist = (productId) => {
-        if (wishlist.includes(productId)) {
-            dispatch(action.useWishlist(wishlist.filter(id => id !== productId)));
-        } else {
-            dispatch(  action.useWishlist( [...wishlist, productId]));
-        }
+    const handleWishlistToggle = (productId) => {
+        dispatch(toggleWishlist(productId));
     };
-
-    
 
     if (loading) {
         return (
@@ -42,39 +26,34 @@ const Hero = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-
-            
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {product.map((product) => (
-                    <div key={product.id} className="bg-white  overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                {filteredProduct .map((item) => (
+                    <div key={item.id} className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                         <div className="relative">
                             <img 
-                                src={product.image} 
-                                alt={product.title} 
-                                className="w-full h-48 object-contain p-4 "
+                                src={item.image} 
+                                alt={item.title} 
+                                className="w-full h-48 object-contain p-4"
                             />
                             <button
-                                onClick={() => toggleWishlist(product.id)}
+                                onClick={() => handleWishlistToggle(item.id)}
                                 className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
                             >
-                                {wishlist.includes(product.id) ? (
+                                {wishlist.includes(item.id) ? (
                                     <IoIosHeart className="text-red-500 text-xl" />
                                 ) : (
                                     <IoIosHeartEmpty className="text-gray-400 text-xl hover:text-red-500" />
                                 )}
                             </button>
                         </div>
-
                         <div className="p-4">
                             <h3 className="text-gray-900 font-semibold text-lg mb-1 truncate">
-                                {product.title}
+                                {item.title}
                             </h3>
-                         
                             <div className="flex justify-between items-center">
-                                <span className="text-gray-900  text-lg">
-                                    ${product.price.toFixed(2)}
+                                <span className="text-gray-900 text-lg">
+                                    ${item.price.toFixed(2)}
                                 </span>
-                              
                             </div>
                         </div>
                     </div>

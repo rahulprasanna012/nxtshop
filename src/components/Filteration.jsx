@@ -1,56 +1,40 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { sortProducts } from '../redux/productSlice';
 
 const Filteration = () => {
+    const ListofItems = [
+        { option: "RECOMMENDED", value: "recommended" },
+        { option: "NEWEST FIRST", value: "newest" },
+        { option: "POPULAR", value: "popular" },
+        { option: "PRICE: HIGH TO LOW", value: "priceHighToLow" },
+        { option: "PRICE: LOW TO HIGH", value: "priceLowToHigh" },
+    ];
 
-    const ListofIltems=[{
-        option:"RECOMMENDED",
-        value:"all",
-    },
-    {
-        option:"NEWEST FIRST",
-        value:"new",
-    },
-    {
-        option:"POPULAR",
-        value:"popular",
-    },
-    {
-        option:"PRICE: HIGH TO LOW",
-        value:"asc",
-    },
-    {
-        option:"PRICE: LOW TO HIGH",
-        value:"dec",
-    },
+    const { product } = useSelector((store) => store.product);
+    const dispatch = useDispatch();
 
-]
+    const handleFilterChange = (e) => {
+        dispatch(sortProducts(e.target.value));
+    };
 
-const {product} = useSelector((store)=>(store.productState))
-
-
-  return (
-    <div className='flex justify-between items-center border  border-r-0 border-l-0 h-16  border-gray-400 mt-14'>
+    return (
+        <div className='flex justify-between items-center border border-r-0 border-l-0 border-gray-400 h-16 mt-14'>
             <div>
-            
                 <p className='font-bold'>{product.length} ITEMS</p>
-
             </div>
-      
-        <select className='outline-0 font-bold'>
+            <select 
+                className='outline-0 font-bold'
+                onChange={handleFilterChange}
+            >
+                {ListofItems.map((item) => (
+                    <option key={item.value} value={item.value}>
+                        {item.option}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
+};
 
-            {
-                ListofIltems.map((item)=>(
-                <option value={item.value} >{item.option}</option>))
-            }
-
-
-        </select>
-
-
-
-    </div>
-  )
-}
-
-export default Filteration
+export default Filteration;

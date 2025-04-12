@@ -1,21 +1,13 @@
-import axios from "axios";
-import productSlice from "./productSlice";
+// src/redux/productMiddleware.js
+import axios from 'axios';
+import { setProducts, setLoading, setError } from './productSlice';
 
-const action = productSlice.actions;
-
-export const fetchProductMiddleware = async (dispatch)=>{
-
-
-    try {
-        const response = await axios.get('https://fakestoreapi.com/products');
-
-        const data=await response.data
-        
-        dispatch(action.useProduct( data))
-
-    } catch (error) {
-        console.error("Error fetching products:", error);
-    } 
-
-
-}
+export const fetchProductMiddleware = () => async (dispatch) => {
+  try {
+    dispatch(setLoading());
+    const response = await axios.get('https://fakestoreapi.com/products');
+    dispatch(setProducts(response.data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
