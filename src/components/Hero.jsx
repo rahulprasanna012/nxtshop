@@ -1,35 +1,36 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductMiddleware } from '../redux/productMiddleware';
+import productSlice from '../redux/productSlice';
 
 
 const Hero = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [wishlist, setWishlist] = useState([]);
+ 
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const{product,loading,wishlist}=useSelector((store)=>(store.productState))
 
-    async function fetchData() {
-        try {
-            const response = await axios.get('https://fakestoreapi.com/products');
-            setProducts(response.data);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const dispatch=useDispatch();
+    const action=productSlice.actions;
+
+    useEffect(()=>{
+
+        dispatch(fetchProductMiddleware)
+
+    },[])
+
+    
 
     const toggleWishlist = (productId) => {
         if (wishlist.includes(productId)) {
-            setWishlist(wishlist.filter(id => id !== productId));
+            dispatch(action.useWishlist(wishlist.filter(id => id !== productId)));
         } else {
-            setWishlist([...wishlist, productId]);
+            dispatch(  action.useWishlist( [...wishlist, productId]));
         }
     };
+
+    
 
     if (loading) {
         return (
@@ -44,7 +45,7 @@ const Hero = () => {
 
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {products.map((product) => (
+                {product.map((product) => (
                     <div key={product.id} className="bg-white  overflow-hidden hover:shadow-lg transition-shadow duration-300">
                         <div className="relative">
                             <img 

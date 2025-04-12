@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Filteration = () => {
 
@@ -25,12 +26,14 @@ const Filteration = () => {
 
 ]
 
+const {product} = useSelector((store)=>(store.productState))
+
 
   return (
     <div className='flex justify-between items-center border  border-r-0 border-l-0 h-16  border-gray-400 mt-14'>
             <div>
             
-                <p className='font-bold'>20 ITEMS</p>
+                <p className='font-bold'>{product.length} ITEMS</p>
 
             </div>
       
