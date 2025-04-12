@@ -10,3 +10,13 @@ body{
   margin: 0px;
   padding: 0px;
 }
+
+/* For smooth transitions */
+nav ul {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Mobile menu backdrop (optional) */
+.mobile-menu-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
