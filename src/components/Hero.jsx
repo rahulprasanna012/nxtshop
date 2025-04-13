@@ -13,7 +13,9 @@ const Hero = () => {
         dispatch(fetchProductMiddleware());
     }, [dispatch]);
 
-    const handleWishlistToggle = (productId) => {
+    const handleWishlistToggle = (e, productId) => {
+        e.preventDefault(); // Prevent default action
+        e.stopPropagation(); // Stop event bubbling
         dispatch(toggleWishlist(productId));
     };
 
@@ -26,10 +28,14 @@ const Hero = () => {
     }
 
     return (
-<div className="w-full px-0 sm:px-4 py-4 sm:py-8">
+        <div className="w-full px-0 sm:px-4 py-4 sm:py-8">
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
                 {filteredProduct.map((item) => (
-                    <Link to={`${item.id}`} key={item.id} className="w-full bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <Link 
+                        to={`/product/${item.id}`} 
+                        key={item.id} 
+                        className="w-full bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                    >
                         <div className="relative">
                             <img 
                                 src={item.image} 
@@ -38,7 +44,7 @@ const Hero = () => {
                             />
                     
                             <button
-                                onClick={() => handleWishlistToggle(item.id)}
+                                onClick={(e) => handleWishlistToggle(e, item.id)}
                                 className="absolute top-1 right-1 sm:top-2 sm:right-2 p-1 sm:p-2 bg-white rounded-full shadow-md hover:bg-gray-100 transition-colors"
                             >
                                 {wishlist.includes(item.id) ? (

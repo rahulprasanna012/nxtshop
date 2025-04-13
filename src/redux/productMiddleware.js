@@ -1,6 +1,6 @@
 // src/redux/productMiddleware.js
 import axios from 'axios';
-import { setProducts, setLoading, setError } from './productSlice';
+import { setProducts,setProductDetails, setLoading, setError } from './productSlice';
 
 export const fetchProductMiddleware = () => async (dispatch) => {
   try {
@@ -11,3 +11,17 @@ export const fetchProductMiddleware = () => async (dispatch) => {
     dispatch(setError(error.message));
   }
 };
+
+export const fetchProductDetailsMiddleware=(id)=>async (dispatch)=>{
+
+  console.log(id)
+
+  try {
+    dispatch(setLoading());
+    const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+    dispatch(setProductDetails(response.data));
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+
+}

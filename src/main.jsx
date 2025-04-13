@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
   <BrowserRouter>
   
 
-  <StrictMode>
+
     <Provider store={store}>
 
     <App />
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')).render(
     </Provider>
 
       
-    </StrictMode>
+   
   
   
   </BrowserRouter>

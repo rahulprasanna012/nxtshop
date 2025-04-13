@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 import HeaderItems from './HeaderItems'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
-
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -12,44 +11,37 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  
-
-
-  
-
   return (
-    <header className=' md:mx-16 p-5'>
-      <div className='flex items-center justify-between my-3'>
-        {/* Mobile menu button - only visible on small screens */}
-        
-        <img src={logo} alt="logo" className='size-7'/>
+    <header className='w-full sticky top-0 bg-white z-50 mb-14'>
+      <div className='container mx-auto px-4 py-3'>
+        <div className='flex items-center justify-between'>
+          {/* Logo and Brand */}
+          <div className='flex items-center justify-between '>
+            <img src={logo} alt="logo" className='h-7 w-7'/>
+           
+          </div>
+          <h1 className='text-3xl font-bold ml-3'>Nxtshop</h1>
+          
+          {/* Header Items - hidden on mobile when menu is open */}
+          <div className={`${isMobileMenuOpen ? 'hidden' : 'flex'} md:flex items-center`}>
+            <HeaderItems/>
+          </div>
 
-        <div className='ml-auto '>
-          <h1 className='text-3xl font-bold mr-36'>Nxtshop</h1>
+          {/* Mobile menu button */}
+          <button 
+            className='md:hidden z-50 p-2'
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
         </div>
-        
-        {/* Hide HeaderItems on mobile when menu is open */}
-        <div className={`${isMobileMenuOpen ? 'hidden' : 'block'} md:block`}>
-          <HeaderItems/>
+
+        {/* Navbar - show differently on mobile */}
+        <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:block mt-10 `}>
+          <Navbar isMobile={isMobileMenuOpen} />
         </div>
-
-        <button 
-          className='pr-2 md:hidden z-50 '
-          onClick={toggleMobileMenu}
-        >
-          {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
       </div>
-
-      
-
-
-      {/* Navbar - show differently on mobile */}
-      <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:block`}>
-        <Navbar isMobile={isMobileMenuOpen} />
-      </div>
-
-
     </header>
   )
 }
