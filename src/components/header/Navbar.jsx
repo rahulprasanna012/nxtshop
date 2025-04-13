@@ -8,25 +8,21 @@ const Navbar = ({ isMobile }) => {
       name: "Shop",
       link: "/"
     },
-    {
-      id: 1,
-      name: "SKILLS",
-      link: "/skills"
-    },
+    
     {
       id: 2,
       name: "STORIES",
-      link: "/stories"
+      link: "/"
     },
     {
       id: 3,
       name: "ABOUT",
-      link: "/about"
+      link: "/"
     },
     {
       id: 4,
       name: "CONTACT US",
-      link: "/contact"
+      link: "/"
     }
   ]
 
