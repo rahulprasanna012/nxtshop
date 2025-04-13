@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const { filteredProduct, loading, wishlist } = useSelector((store) => store.product);
+    const { user } = useSelector((store) => store.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -59,9 +60,14 @@ const Hero = () => {
                                 {item.title}
                             </h3>
                             <div className="flex justify-between items-center">
-                                <span className="text-gray-900 text-sm sm:text-lg">
-                                    ${item.price.toFixed(2)}
-                                </span>
+                                
+
+                                    {
+                                        user==null?<p>Signin to see the price</p>:<p className='text-gray-900 text-sm sm:text-lg'>${item.price.toFixed(2)}</p>
+                                    }
+
+                                    
+                              
                             </div>
                         </div>
                     </Link>
