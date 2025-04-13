@@ -25,7 +25,7 @@ const Header = () => {
         <img src={logo} alt="logo" className='size-7'/>
 
         <div className='ml-auto '>
-          <h1 className='text-3xl font-bold mx-10'>Nxtshop</h1>
+          <h1 className='text-3xl font-bold mr-36'>Nxtshop</h1>
         </div>
         
         {/* Hide HeaderItems on mobile when menu is open */}

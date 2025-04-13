@@ -25,12 +25,12 @@ const productSlice = createSlice({
             state.search = action.payload;
             const searchLower = action.payload.toLowerCase();
             
-            // Always filter from the original product list
+            
             state.filteredProduct = state.product.filter(item => 
                 item.title.toLowerCase().includes(searchLower)
             );
             
-            // Reapply sorting after search
+            
             if (state.sortBy !== "recommended") {
                 const sortAction = { payload: state.sortBy };
                 productSlice.caseReducers.sortProducts(state, sortAction);
@@ -48,7 +48,7 @@ const productSlice = createSlice({
         },
         sortProducts: (state, action) => {
             state.sortBy = action.payload;
-            const productsToSort = [...state.filteredProduct]; // Use current filtered products
+            const productsToSort = [...state.filteredProduct]; 
             
             switch (action.payload) {
                 case "newest":
@@ -64,7 +64,7 @@ const productSlice = createSlice({
                     productsToSort.sort((a, b) => a.price - b.price);
                     break;
                 default:
-                    // For "recommended", use the original filtered products without sorting
+                    
                     break;
             }
             

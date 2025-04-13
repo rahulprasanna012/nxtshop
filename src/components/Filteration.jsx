@@ -19,12 +19,12 @@ const Filteration = () => {
     };
 
     return (
-        <div className='flex justify-between items-center border border-r-0 border-l-0 border-gray-400 h-16 mt-14'>
+        <div className='w-full flex justify-between items-center border-t border-b border-gray-400 h-16 py-4'>
             <div>
-                <p className='font-bold'>{product.length} ITEMS</p>
+                <p className='font-bold text-sm sm:text-base'>{product.length} ITEMS</p>
             </div>
             <select 
-                className='outline-0 font-bold'
+                className='outline-0 font-bold text-sm sm:text-base bg-transparent'
                 onChange={handleFilterChange}
             >
                 {ListofItems.map((item) => (

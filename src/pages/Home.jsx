@@ -6,21 +6,13 @@ import Hero from '../components/Hero'
 
 const Home = () => {
   return (
-    <div>
-
-        <Header/>
-        <div className='flex justify-center'>
-        <Banner/>
-        </div>
-        <div className='mx-14'>
-        <Filteration/>
-        <Hero/>
-
-        </div>
-
-        
-        
-
+    <div className="w-full max-w-[100vw] overflow-x-hidden">
+      <Header/>
+      <Banner/> 
+      <div className="mx-10">
+          <Filteration/>
+          <Hero/>
+      </div>
     </div>
   )
 }
