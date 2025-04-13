@@ -7,6 +7,11 @@ import { useSelector } from 'react-redux'
 const HeaderItems = () => {
 
   const {cart}=useSelector((store)=>(store.product))
+  const {user}=useSelector((store)=>(store.auth))
+
+ 
+ 
+  
 
   return (
     <div className='flex items-center space-x-4'>
@@ -20,8 +25,12 @@ const HeaderItems = () => {
         <BsCart3 className='text-lg' />
       </Link>
 
-      <Link to="/auth" className='hover:text-gray-600 transition-colors'>
+      <Link to="/auth" className='hover:text-gray-600 transition-colors flex items-center '>
         <FaRegUser className='text-lg' />
+
+        {
+          user===null?<p className='text-sm m-2'>Signin</p>:<p>{user.name.firstname}</p>
+        }
       </Link>
       
       <div className='hidden md:flex items-center hover:text-gray-600 transition-colors'>

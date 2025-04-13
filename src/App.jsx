@@ -5,6 +5,7 @@ import ProductDetails from './components/ProductDetails'
 import Header from './components/header/Header'
 import Wishlist from './components/Wishlist'
 import Cart from './components/Cart'
+import AuthPage from './pages/AuthPage'
 
 const App = () => {
   return (
@@ -14,7 +15,7 @@ const App = () => {
       <Routes>
 
       
-
+      <Route path="/auth" element={<AuthPage />} />
         <Route path="/" element={<Home/>}/>
         <Route  path='/product/:id' element={<ProductDetails/>} />
         <Route  path='/product/wishlist' element={<Wishlist/>}/>

@@ -20,7 +20,7 @@ const Header = () => {
             <img src={logo} alt="logo" className='h-7 w-7'/>
            
           </div>
-          <h1 className='text-3xl font-bold ml-3'>Nxtshop</h1>
+          <h1 className='text-md md:text-3xl font-bold ml-3'>Nxtshop</h1>
           
           {/* Header Items - hidden on mobile when menu is open */}
           <div className={`${isMobileMenuOpen ? 'hidden' : 'flex'} md:flex items-center`}>
