@@ -3,6 +3,7 @@ import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductMiddleware } from '../redux/productMiddleware';
 import { toggleWishlist } from '../redux/productSlice';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     const { filteredProduct, loading, wishlist } = useSelector((store) => store.product);
@@ -28,7 +29,7 @@ const Hero = () => {
 <div className="w-full px-0 sm:px-4 py-4 sm:py-8">
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
                 {filteredProduct.map((item) => (
-                    <div key={item.id} className="w-full bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <Link to={`${item.id}`} key={item.id} className="w-full bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                         <div className="relative">
                             <img 
                                 src={item.image} 
@@ -57,7 +58,7 @@ const Hero = () => {
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

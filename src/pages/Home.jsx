@@ -9,7 +9,7 @@ const Home = () => {
     <div className="w-full max-w-[100vw] overflow-x-hidden">
       <Header/>
       <Banner/> 
-      <div className="mx-10">
+      <div className="mx-10 md:mx-32 ">
           <Filteration/>
           <Hero/>
       </div>
